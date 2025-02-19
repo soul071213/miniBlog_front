@@ -42,8 +42,18 @@ const Comments=styled.div`
     background-color: white;
 `;
 
-export default function detailPage(props){
-    const {title,content,comments}=props;
+export default function detailPage(){
+    const getDetail = async () => {
+        try {
+          const res = await axios.post("http://localhost:3000/board/detail", { id: 1 });
+          setDetailData(res.data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+    // const {title,content,comments}=props;
+    const title="d";
+    const content="d";
     return(
         <>
         <Wrapper>
