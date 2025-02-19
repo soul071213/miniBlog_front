@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Title from "../../components/title";
 import { useEffect, useState } from "react";
 import { getList, postBoard } from "./api"; // api.js에서 가져오기
-
+import { Link } from "react-router-dom";
 const Wrapper = styled.div`
     width: 100%;
     padding: 0 5%;
@@ -27,17 +27,19 @@ const MainContainer = styled.div`
     justify-content: space-between;
 `;
 
-const WriteLists = styled.div`
-    width: 30%;
-    padding: 100px 0;
-    margin: 24px 0;
-    background-color: white;
-    font-size: 24px;
-`;
 
 const InputContainer = styled.input`
     margin: 2% 2%;
     width: 95%;
+    font-size: 24px;
+`;
+const CustomLink = styled(Link)`
+  text-decoration: none; /* 기본 밑줄 제거 */
+  color: inherit; /* 부모 요소의 색상 상속 */
+  width: 30%;
+padding: 100px 0;
+    margin: 24px 0;
+    background-color: white;
     font-size: 24px;
 `;
 
@@ -47,6 +49,7 @@ export default function MainPage() {
     const [Lists, setLists] = useState([]);
 
     const fetchList = async () => {
+        console.log("요청 됨");
         const data = await getList();
         setLists(data);
     };
@@ -57,7 +60,6 @@ export default function MainPage() {
         setDetail("");
         fetchList(); // 새 데이터 불러오기
     };
-
     useEffect(() => {
         fetchList();
     }, []);
@@ -69,10 +71,10 @@ export default function MainPage() {
                 <MainContainer>
                     {Lists.length > 0 ? (
                         Lists.map((list, index) => (
-                            <WriteLists key={index}>
-                                <p>{list.title}</p>
-                                <p>{list.detail}</p>
-                            </WriteLists>
+                            <CustomLink key={index} to={`/detail/${list.id}`}>
+                                    <p>{list.title}</p>
+                                    <p>{list.detail}</p>
+                            </CustomLink>
                         ))
                     ) : (
                         <div>로딩 중</div>

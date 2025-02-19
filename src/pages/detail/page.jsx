@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import Title from "../../components/title";
+import { useParams } from 'react-router-dom';
+import {getDetail,getComments,postComment} from "./api";
+import { useEffect, useState } from "react";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -15,6 +18,7 @@ const GrayMainContent = styled.div`
     border-radius: 12px;
     background-color: #F5F5F5;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2% 0;
@@ -43,17 +47,33 @@ const Comments=styled.div`
 `;
 
 export default function detailPage(){
-    const getDetail = async () => {
-        try {
-          const res = await axios.post("http://localhost:3000/board/detail", { id: 1 });
-          setDetailData(res.data);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-    // const {title,content,comments}=props;
-    const title="d";
-    const content="d";
+    const {id}=useParams();
+    const [text,setText]=useState("");
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const [commentt,setComment]=useState([]);
+
+    const getDetails=async()=>{
+        const data =await getDetail(id);
+        setTitle(data.title);
+        setContent(data.detail);
+    }
+
+    const getComm=async()=>{
+        const data = await getComments(id);
+        setComment(data);
+        
+    }
+    useEffect(()=>{
+        getComm();
+        getDetails();
+    },[id]);
+
+    const submit= async()=>{
+        await postComment(id,text);
+        getComm();
+    }
+
     return(
         <>
         <Wrapper>
@@ -66,15 +86,16 @@ export default function detailPage(){
                 </MainContent>
             </GrayMainContent>
             <GrayMainContent>
-                {/* {comments.map((comment,index)=>{
-                    return(
+                {commentt?.map((commentss,index)=>(
                         <Comments key={index}>
-                            {comment.comment}
-                            {comment.time}
+                            <p>{commentss.content}</p>
+                            <p>{commentss.created_at}</p>
+                            
                         </Comments>
-                    );
-                })} */}
+                ))}
             </GrayMainContent>
+            <input type="text"  value={text} onChange={(e)=>setText( e.target.value)}/>
+            <button onClick={()=>{submit();}}>제출</button>
         </Wrapper>
         </>
         

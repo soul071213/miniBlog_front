@@ -1,20 +1,17 @@
 import './App.css';
-import DetailPage from './pages/detail/page';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainPage from './pages/main/page';
+import DetailPage from './pages/detail/page';
 
 function App() {
-  // useEffect(() => {
-  //   if (detailData) {
-  //     alert(detailData[0].title);
-  //   }
-  // }, [detailData]);
-
   return (
-    <>
-      <MainPage/>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
