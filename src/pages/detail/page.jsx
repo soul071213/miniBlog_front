@@ -1,52 +1,72 @@
 import styled from "styled-components";
 import Title from "../../components/title";
-import Context from "../../components/detail/context";
 
 const Wrapper = styled.div`
-    width: 100vw;
-    padding: 0px 5%;
+    width: 100%;
+    padding: 0px 10%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 `;
 
-const MainContext = styled.div`
-    width: 80%;
+const GrayMainContent = styled.div`
+    margin-top: 24px;
+    width: 100%;
+    border-radius: 12px;
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2% 0;
+`;
+
+const MainContent = styled.div`
+    width: 95%;
     height: 300px;
-    color: white;
+    background-color: white;
 `;
 
-const MainContextTitle = styled.p`
+const Text = styled.p`
     font-size: 24px;
     padding-left: 24px;
     padding-top: 24px;
 `;
 
-const MainContextContent = styled.p`
+const Comments=styled.div`
+    padding: 5px 24px;
+    width: 95%;
     font-size: 24px;
-    padding-left: 24px;
-    padding-top: 8px;
-`;
-
-const BoardContext = styled.div`
-    padding-top: 113px;
-    width: 80%;
-    height: 300px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
 `;
 
 export default function detailPage(props){
+    const {title,content,comments}=props;
     return(
+        <>
         <Wrapper>
-            <Title />
-            <Context>
-                <MainContext>
-                    <MainContextTitle>{props.title}</MainContextTitle>
-                    <MainContextContent>{props.content}</MainContextContent>
-                </MainContext>
-                
-            </Context>
+            <Title></Title>
+
+            <GrayMainContent>
+                <MainContent>
+                    <Text>{title}</Text>
+                    <Text>{content}</Text>
+                </MainContent>
+            </GrayMainContent>
+            <GrayMainContent>
+                {/* {comments.map((comment,index)=>{
+                    return(
+                        <Comments key={index}>
+                            {comment.comment}
+                            {comment.time}
+                        </Comments>
+                    );
+                })} */}
+            </GrayMainContent>
         </Wrapper>
+        </>
+        
     )
 }

@@ -4,6 +4,9 @@ const TitleText = styled.p`
     font-size: 24px;
     padding-top: 40px;
     padding-bottom: 24px;
+    width: 100%;
+    display:flex;
+    justify-content: start;
 `;
 
 
