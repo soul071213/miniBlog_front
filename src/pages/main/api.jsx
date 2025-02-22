@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const API_BASE_URL = "http://localhost:3000/board";
 
 // 게시글 목록 가져오기
