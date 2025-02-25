@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import Title from "../../components/title";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { signUp } from "./api";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -31,7 +34,9 @@ const InputContainer = styled.input`
     padding: 12px;
 `;
 
-const SubmitButton = styled.button`
+const SubmitButton = styled(Link)`
+    text-decoration: none; /* 기본 밑줄 제거 */
+    color: inherit; /* 부모 요소의 색상 상속 */
     width: 275px;
     height: 64px;
     display: flex;
@@ -44,17 +49,23 @@ const SubmitButton = styled.button`
 `;
 
 export default function SignUp(){
+    const [id,setId]=useState("");
+    const [password,setPassword]=useState("");
+
+    const submit=async()=>{
+        await signUp(id,password);
+    }
+    
     return(
         <> 
             <Wrapper>
                 <Title></Title>
                 <GrayContainer>
-                    <InputContainer></InputContainer>
-                    <InputContainer></InputContainer>
-                    <SubmitButton>회원가입</SubmitButton>
+                    <InputContainer value={id} onChange={(e)=>setId(e.target.value)}></InputContainer>
+                    <InputContainer value={password} onChange={(e)=>setPassword(e.target.value)}></InputContainer>
+                    <SubmitButton onClick={submit} to={'/login'}>회원가입</SubmitButton>
                 </GrayContainer>
             </Wrapper>
         </>
     );
-
 }
