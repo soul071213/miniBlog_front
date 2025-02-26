@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import Title from "../../components/title";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "./api";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -44,14 +47,25 @@ const SubmitButton = styled.button`
 `;
 
 export default function LoginPage(){
+    const [id,setId]=useState("");
+    const [password,setPassword]=useState("");
+    const navigate = useNavigate(); 
+
+    const submit=async()=>{
+        const data = await login(id,password);
+        if (data.status === 200) {
+            navigate('/');
+        }
+    }
+
     return(
         <> 
             <Wrapper>
                 <Title></Title>
                 <GrayContainer>
-                    <InputContainer></InputContainer>
-                    <InputContainer></InputContainer>
-                    <SubmitButton>로그인</SubmitButton>
+                    <InputContainer value={id} onChange={(e)=>{setId(e.target.value)}}></InputContainer>
+                    <InputContainer value={password} onChange={(e)=>{setPassword(e.target.value)}}></InputContainer>
+                    <SubmitButton onClick={submit} >로그인</SubmitButton>
                 </GrayContainer>
             </Wrapper>
         </>
