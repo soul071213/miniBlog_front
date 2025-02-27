@@ -3,6 +3,7 @@ import Title from "../../components/title";
 import { useEffect, useState } from "react";
 import { getList, postBoard } from "./api"; // api.js에서 가져오기
 import { Link } from "react-router-dom";
+
 const Wrapper = styled.div`
     width: 100%;
     padding: 0 5%;

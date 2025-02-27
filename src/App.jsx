@@ -8,15 +8,14 @@ import SignUp from './pages/signUp/page';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path='/login' element={<LoginPage/>}></Route>
-        <Route path='/singup' element={<SignUp/>}></Route>
-        <Route path="/detail/:id" element={<DetailPage />} />
-        
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path='/login' element={<LoginPage/>}></Route>
+          <Route path='/singup' element={<SignUp/>}></Route>
+          <Route path="/detail/:id" element={<DetailPage />} />
+        </Routes>
+      </BrowserRouter>
   );
 }
 
