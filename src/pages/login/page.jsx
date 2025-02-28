@@ -46,7 +46,7 @@ const SubmitButton = styled.button`
     font-size: 24px;
     border-radius: 12px;
     background-color: white;
-`;
+`; 
 
 export default function LoginPage(){
     const [id,setId]=useState("");
@@ -54,7 +54,7 @@ export default function LoginPage(){
     const navigate = useNavigate(); 
     const [accessToken, setAccessToken] = useRecoilState(access);
     const setAccess = SetRecoilState();
-    
+
     const submit=async()=>{
         const data = await login(id,password);
         if (data.status === 200) {
