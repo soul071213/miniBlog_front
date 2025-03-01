@@ -3,7 +3,7 @@ import Title from "../../components/title";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "./api";
-import {useRecoilState } from "recoil";
+import {SetRecoilState } from "recoil";
 import { access } from "../../atom/access";
 
 const Wrapper = styled.div`
@@ -53,7 +53,8 @@ export default function LoginPage(){
     const [password,setPassword]=useState("");
     const navigate = useNavigate(); 
     const [accessToken, setAccessToken] = useRecoilState(access);
-
+    const setAccess = SetRecoilState();
+    
     const submit=async()=>{
         const data = await login(id,password);
         if (data.status === 200) {
