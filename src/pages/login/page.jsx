@@ -48,6 +48,18 @@ const SubmitButton = styled.button`
     background-color: white;
 `; 
 
+const Button = styled.button`
+    width: 275px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    border: none;
+    justify-content: center;
+    font-size: 24px;
+    border-radius: 12px;
+    background-color: white;
+`;
+
 export default function LoginPage(){
     const [id,setId]=useState("");
     const [password,setPassword]=useState("");
