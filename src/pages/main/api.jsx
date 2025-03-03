@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { access } from "../../atom/access";
 
 
 const API_BASE_URL = "http://localhost:3000/board";

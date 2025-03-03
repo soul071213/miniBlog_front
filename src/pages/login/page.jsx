@@ -3,8 +3,8 @@ import Title from "../../components/title";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "./api";
-import {SetRecoilState } from "recoil";
 import { access } from "../../atom/access";
+import { useRecoilState } from "recoil";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -48,30 +48,18 @@ const SubmitButton = styled.button`
     background-color: white;
 `; 
 
-const Button = styled.button`
-    width: 275px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    border: none;
-    justify-content: center;
-    font-size: 24px;
-    border-radius: 12px;
-    background-color: white;
-`;
 
 export default function LoginPage(){
     const [id,setId]=useState("");
     const [password,setPassword]=useState("");
     const navigate = useNavigate(); 
     const [accessToken, setAccessToken] = useRecoilState(access);
-    const setAccess = SetRecoilState();
 
     const submit=async()=>{
         const data = await login(id,password);
         if (data.status === 200) {
             setAccessToken(data.data);
-            console.log(accessToken);
+            console.log('성공');
             navigate('/');
         }
     }
