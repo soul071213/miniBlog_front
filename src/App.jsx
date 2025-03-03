@@ -11,6 +11,7 @@ import MainPage from './pages/main/page';
 import DetailPage from './pages/detail/page';
 import LoginPage from './pages/login/page';
 import SignUp from './pages/signUp/page';
+import Mypage from './pages/my/page';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/login' element={<LoginPage/>}></Route>
           <Route path='/SignUp' element={<SignUp/>}></Route>
           <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path='/mypage' element={<Mypage></Mypage>}></Route>
         </Routes>
       </BrowserRouter>
     </Provider>
