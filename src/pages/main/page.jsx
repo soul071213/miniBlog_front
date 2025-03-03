@@ -3,6 +3,7 @@ import Title from "../../components/title";
 import { useEffect, useState } from "react";
 import { getList, postBoard } from "./api"; // api.js에서 가져오기
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -49,14 +50,17 @@ export default function MainPage() {
     const [detail, setDetail] = useState("");
     const [Lists, setLists] = useState([]);
 
+    const accessToken = useSelector(state=>state.access.token);
+    
     const fetchList = async () => {
+        console.log(accessToken);
         console.log("요청 됨");
-        const data = await getList();
+        const data = await getList(accessToken);
         setLists(data);
     };
 
     const submit = async () => {
-        await postBoard(title, detail);
+        await postBoard(title, detail,accessToken);
         setTitle("");
         setDetail("");
         fetchList(); // 새 데이터 불러오기

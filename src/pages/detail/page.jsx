@@ -3,6 +3,7 @@ import Title from "../../components/title";
 import { useParams } from 'react-router-dom';
 import {getDetail,getComments,postComment} from "./api";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -52,15 +53,16 @@ export default function detailPage(){
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [commentt,setComment]=useState([]);
+    const AccessToken = useSelector(state=>state.access.token);
 
     const getDetails=async()=>{
-        const data =await getDetail(id);
+        const data =await getDetail(id,AccessToken);
         setTitle(data.title);
         setContent(data.detail);
     }
 
     const getComm=async()=>{
-        const data = await getComments(id);
+        const data = await getComments(id,AccessToken);
         setComment(data);
         
     }
@@ -70,7 +72,7 @@ export default function detailPage(){
     },[id]);
 
     const submit= async()=>{
-        await postComment(id,text);
+        await postComment(id,text,AccessToken);
         getComm();
     }
 

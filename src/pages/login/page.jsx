@@ -3,8 +3,8 @@ import Title from "../../components/title";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "./api";
-import { access } from "../../atom/access";
-import { useRecoilState } from "recoil";
+import {useDispatch, useSelector } from "react-redux";
+import { setToken } from "../../store/slices/AccessSlice";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -53,15 +53,17 @@ export default function LoginPage(){
     const [id,setId]=useState("");
     const [password,setPassword]=useState("");
     const navigate = useNavigate(); 
-    const [accessToken, setAccessToken] = useRecoilState(access);
+
+    const dispatch = useDispatch();
+    const getTokens = useSelector(state=>state.access.token);
 
     const submit=async()=>{
         const data = await login(id,password);
         if (data.status === 200) {
-            setAccessToken(data.data);
-            console.log('성공');
+            const token = data.data;
+            dispatch(setToken(token));
             navigate('/');
-        }
+        }   
     }
 
     return(

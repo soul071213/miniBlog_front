@@ -1,6 +1,12 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+//Redux
+import {Provider} from "react-redux";
+import store from './store/store';
+
+//페이지
 import MainPage from './pages/main/page';
 import DetailPage from './pages/detail/page';
 import LoginPage from './pages/login/page';
@@ -8,6 +14,7 @@ import SignUp from './pages/signUp/page';
 
 function App() {
   return (
+    <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
@@ -16,6 +23,7 @@ function App() {
           <Route path="/detail/:id" element={<DetailPage />} />
         </Routes>
       </BrowserRouter>
+    </Provider>
   );
 }
 
