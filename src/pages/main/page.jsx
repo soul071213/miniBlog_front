@@ -53,8 +53,6 @@ export default function MainPage() {
     const accessToken = useSelector(state=>state.access.token);
     
     const fetchList = async () => {
-        console.log(accessToken);
-        console.log("요청 됨");
         const data = await getList(accessToken);
         setLists(data);
     };
@@ -91,6 +89,7 @@ export default function MainPage() {
                 <InputContainer value={title} onChange={(e) => setTitle(e.target.value)} />
                 <InputContainer value={detail} onChange={(e) => setDetail(e.target.value)} />
                 <button onClick={submit}>새글</button>
+                <Link to={`/mypage`}>마이 페이지</Link>
             </GreyMainContainer>
         </Wrapper>
     );

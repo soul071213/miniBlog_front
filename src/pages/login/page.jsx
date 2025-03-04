@@ -3,7 +3,7 @@ import Title from "../../components/title";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "./api";
-import {useDispatch, useSelector } from "react-redux";
+import {useDispatch } from "react-redux";
 import { setToken } from "../../store/slices/AccessSlice";
 
 const Wrapper = styled.div`
@@ -55,7 +55,6 @@ export default function LoginPage(){
     const navigate = useNavigate(); 
 
     const dispatch = useDispatch();
-    const getTokens = useSelector(state=>state.access.token);
 
     const submit=async()=>{
         const data = await login(id,password);
