@@ -23,6 +23,9 @@ export default function Mypage(){
         console.log(user);
     },[user]);
     useEffect(()=>{
+        console.log(user);
+    },[password]);
+    useEffect(()=>{
         get();
     },[]);
 
