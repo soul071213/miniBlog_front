@@ -19,7 +19,9 @@ export default function Mypage(){
         setUser(users.user_id);
         setPassword(users.password);
     }
-
+    useEffect(()=>{
+        console.log(user);
+    },[user]);
     useEffect(()=>{
         get();
     },[]);
