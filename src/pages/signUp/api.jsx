@@ -10,3 +10,14 @@ export const signUp = async (id,password) => {
       return [];
     }
   };
+
+  const log = async (AccessToken)=>{
+    try{
+        const res = await axios.post(`${API_BASE_URL}/log`,{headers:{Authorization:AccessToken}});
+        return res.status;
+    }
+    catch(err){
+        console.error(err);
+        return [];
+    }
+}
